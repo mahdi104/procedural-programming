@@ -1,0 +1,47 @@
+PROCEDURE sizevector(var n:INTEGER)
+VAR
+    set_declarations
+BEGIN
+    REPEAT
+        Write("Size Of vector "); 
+        Read(n); 
+    UNTIL (n>0); 
+END
+
+PROCEDURE Remplir(var v: ARRAY_OF FLOAT[4]; n:INTEGER)
+VAR
+    i:INTEGER; 
+BEGIN
+    FOR i FROM 0 TO n STEP 1  DO
+        Read(v[i]); 
+    END_FOR
+END
+FUNCTION DotProduct(v1,v2 : ARRAY_OF FLOAT[4]; n:INTEGER;) : FLOAT
+VAR
+    ps:=0; 
+BEGIN
+    FOR i FROM 0 TO n-1 STEP 1  DO
+        ps=ps+(v1[i]*v2[i]); 
+    END_FOR
+    RETURN ps ;
+END
+
+ALGORITHM ProduitScalaire
+VAR
+    n:INTEGER; 
+    v1,v2: ARRAY_OF FLOAT[4];
+    ps:FLOAT; 
+BEGIN 
+    sizevector(n); 
+    Remplir(v1,n); 
+    Remplir(v2,n);
+    ps:=DotProduct(v1,v2,n); 
+    Write("Produit Scalaire=",ps); 
+    FOR i FROM 0 TO n STEP 1 DO
+        FOR j FROM i+1 TO n STEP 1 DO
+            IF (ps=0) THEN
+                write("les de vecteur ",v1[i]," et ", v2[j], "sont orthogonal "); 
+            END_IF
+        END_FOR
+    END_FOR
+END
